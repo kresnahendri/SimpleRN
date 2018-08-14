@@ -39,7 +39,12 @@ export default (state = initState, action) => {
         ],
         userNameInput: ''
       }
+      
     case USER_SELECT:
+      return {
+        ...state,
+        selectedUser: action.payload
+      }
     case USER_DELETE:
     case MODAL_CLOSE:
     default:

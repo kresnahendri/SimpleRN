@@ -6,35 +6,7 @@ import UserDetail from './src/components/users/UserDetail'
 
 export default class App extends Component {
   state = {
-    users: [
-      { name: 'Falah' },
-      { name: 'Wahyu' },
-      { name: 'Heri' },
-      { name: 'Asrul' },
-      { name: 'Irma' },
-      { name: 'Ahmad' },
-      { name: 'Chandra' },
-      { name: 'Mahesa' },
-      { name: 'Idrus' }
-    ],
-    userNameInput: '',
     selectedUser: null
-  }
-
-  handleOnChangeUserNameInput = (event) => {
-    this.setState({ userNameInput: event })
-  }
-
-  handleOnAddUser = () => {
-    const newUsers = [
-      { name: this.state.userNameInput },
-      ...this.state.users
-    ]
-
-    this.setState({
-      users: newUsers,
-      userNameInput: ''
-    })
   }
 
   handleOnSelectUser = (user) => {
@@ -63,14 +35,8 @@ export default class App extends Component {
           onDelete={this.handleOnDeleteUser}
         />
         <Text>Input User Detail</Text>
-        <UserInput
-          nameInput={this.state.userNameInput}
-          onAddUser={this.handleOnAddUser}
-        />
-        <UserList
-          users={this.state.users}
-          onSelectUser={this.handleOnSelectUser}
-        />
+        <UserInput />
+        <UserList />
       </View>
     )
   }

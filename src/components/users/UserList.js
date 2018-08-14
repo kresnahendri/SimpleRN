@@ -1,9 +1,11 @@
 import React from 'react'
+import { connect } from 'react-redux'
 import { View, Text, StyleSheet, ScrollView, TouchableOpacity } from 'react-native'
 import UserItem from './UserItem'
+import { userSelectAction } from '../../actions/userAction'
 
 const UserList = (props) => {
-  const { users } = props
+  const { users } = props.user
 
   return (
     <ScrollView style={styles.scroll}>
@@ -13,9 +15,7 @@ const UserList = (props) => {
             <TouchableOpacity
               key={index}
               style={styles.touchableContainer}
-              onPress={() => {
-                props.onSelectUser(user)
-              }}
+              onPress={() => props.userSelectAction(user)}
             >
               <UserItem user={user} />
             </TouchableOpacity>
@@ -46,4 +46,9 @@ const styles = StyleSheet.create({
   }
 })
 
-export default UserList
+export default connect(
+  (state) => ({
+    user: state.user
+  }),
+  { userSelectAction }
+)(UserList)

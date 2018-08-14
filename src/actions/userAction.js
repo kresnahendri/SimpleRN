@@ -1,4 +1,4 @@
-import { USER_ADD, USER_CHANGE_INPUT } from "../constants/actionTypes"
+import { USER_ADD, USER_CHANGE_INPUT, USER_SELECT } from "../constants/actionTypes"
 
 export const userChangeInputAction = (userNameInput) => {
   return {
@@ -12,5 +12,12 @@ export const userAddAction = (userName) => {
     payload: {
       name: userName
     }
+  }
+}
+
+export const userSelectAction = (user) => {
+  return {
+    type: USER_SELECT,
+    payload: user
   }
 }
