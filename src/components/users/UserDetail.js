@@ -1,12 +1,15 @@
 import React from 'react'
+import { connect } from 'react-redux'
 import { Text, View, Modal, Button, Image, StyleSheet } from 'react-native'
+import { userDeleteAction, closeModalAction } from '../../actions/userAction'
 
 const UserDetail = (props) => {
-  if (props.selectedUser === null) return null
+  const { selectedUser } = props.user
+  if (selectedUser === null) return null
 
   return (
     <Modal
-      visible={props.selectedUser !== null}
+      visible={selectedUser !== null}
       animationType="slide"
     >
       <View style={styles.container}>
@@ -14,15 +17,15 @@ const UserDetail = (props) => {
           style={styles.image}
           source={require('../../assets/images/user.png')}
         />
-        <Text style={styles.userName}>{props.selectedUser.name}</Text>
+        <Text style={styles.userName}>{selectedUser.name}</Text>
         <Button
           title="Cancel"
           color="red"
-          onPress={props.onCancel}
+          onPress={() => props.closeModalAction()}
         />
         <Button
           title="Delete"
-          onPress={() => props.onDelete(props.selectedUser)}
+          onPress={() => props.userDeleteAction(selectedUser)}
         />
       </View>
     </Modal>
@@ -48,4 +51,9 @@ const styles = StyleSheet.create({
   },
 })
 
-export default UserDetail
+export default connect(
+  (state) => ({
+    user: state.user
+  }),
+  { userDeleteAction, closeModalAction }
+)(UserDetail)

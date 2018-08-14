@@ -39,14 +39,25 @@ export default (state = initState, action) => {
         ],
         userNameInput: ''
       }
-      
+
     case USER_SELECT:
       return {
         ...state,
         selectedUser: action.payload
       }
     case USER_DELETE:
+      return {
+        ...state,
+        selectedUser: null,
+        users: state.users.filter((user) => {
+          return user.name !== action.payload.name
+        })
+      }
     case MODAL_CLOSE:
+      return {
+        ...state,
+        selectedUser: null
+      }
     default:
       return state
   }
