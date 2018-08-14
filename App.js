@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { StyleSheet, Text, View } from 'react-native'
 import UserInput from './src/components/users/UserInput'
 import UserList from './src/components/users/UserList'
+import UserDetail from './src/components/users/UserDetail'
 
 export default class App extends Component {
   state = {
@@ -16,7 +17,8 @@ export default class App extends Component {
       { name: 'Mahesa' },
       { name: 'Idrus' }
     ],
-    userNameInput: ''
+    userNameInput: '',
+    selectedUser: null
   }
 
   handleOnChangeUserNameInput = (event) => {
@@ -35,16 +37,29 @@ export default class App extends Component {
     })
   }
 
+  handleOnSelectUser = (user) => {
+    this.setState({
+      selectedUser: user
+    })
+  }
+
   render() {
     return (
       <View style={styles.container}>
+        <UserDetail
+          selectedUser={this.state.selectedUser}
+          onCancel={() => this.handleOnSelectUser(null)}
+        />
         <Text>Input User Detail</Text>
         <UserInput
           nameInput={this.state.userNameInput}
           onChangeTextInput={this.handleOnChangeUserNameInput}
           onAddUser={this.handleOnAddUser}
         />
-        <UserList users={this.state.users} />
+        <UserList
+          users={this.state.users}
+          onSelectUser={this.handleOnSelectUser}
+        />
       </View>
     )
   }

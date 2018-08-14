@@ -1,5 +1,5 @@
 import React from 'react'
-import { View, Text, StyleSheet, ScrollView } from 'react-native'
+import { View, Text, StyleSheet, ScrollView, TouchableOpacity } from 'react-native'
 import UserItem from './UserItem'
 
 const UserList = (props) => {
@@ -10,7 +10,15 @@ const UserList = (props) => {
       <View style={styles.container}>
         {
           users.map((user, index) => (
-            <UserItem key={index} user={user} />
+            <TouchableOpacity
+              key={index}
+              style={styles.touchableContainer}
+              onPress={() => {
+                props.onSelectUser(user)
+              }}
+            >
+              <UserItem user={user} />
+            </TouchableOpacity>
           ))
         }
       </View>
@@ -32,6 +40,9 @@ const styles = StyleSheet.create({
     fontSize: 20,
     fontWeight: 'bold',
     marginVertical: 20,
+  },
+  touchableContainer: {
+    width: '100%'
   }
 })
 
