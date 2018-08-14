@@ -3,27 +3,35 @@ import {
   USER_SELECT,
   MODAL_CLOSE,
   USER_DELETE,
-  USER_CHANGE_INPUT
+  USER_CHANGE_INPUT,
+  USER_GET_ALL
 } from '../constants/actionTypes'
 
 const initState = {
-  users: [
-    { name: 'Falah' },
-    { name: 'Wahyu' },
-    { name: 'Heri' },
-    { name: 'Asrul' },
-    { name: 'Irma' },
-    { name: 'Ahmad' },
-    { name: 'Chandra' },
-    { name: 'Mahesa' },
-    { name: 'Idrus' }
-  ],
+  // users: [
+  //   { name: 'Falah' },
+  //   { name: 'Wahyu' },
+  //   { name: 'Heri' },
+  //   { name: 'Asrul' },
+  //   { name: 'Irma' },
+  //   { name: 'Ahmad' },
+  //   { name: 'Chandra' },
+  //   { name: 'Mahesa' },
+  //   { name: 'Idrus' }
+  // ],
+  users: [],
   selectedUser: null,
   userNameInput: ''
 }
 
 export default (state = initState, action) => {
   switch (action.type) {
+    case USER_GET_ALL:
+      return {
+        ...state,
+        users: action.payload
+      }
+
     case USER_CHANGE_INPUT:
       return {
         ...state,
@@ -45,6 +53,7 @@ export default (state = initState, action) => {
         ...state,
         selectedUser: action.payload
       }
+
     case USER_DELETE:
       return {
         ...state,
@@ -53,11 +62,13 @@ export default (state = initState, action) => {
           return user.name !== action.payload.name
         })
       }
+
     case MODAL_CLOSE:
       return {
         ...state,
         selectedUser: null
       }
+
     default:
       return state
   }

@@ -1,29 +1,35 @@
-import React from 'react'
+import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { View, Text, StyleSheet, ScrollView, TouchableOpacity } from 'react-native'
 import UserItem from './UserItem'
-import { userSelectAction } from '../../actions/userAction'
+import { userSelectAction, userGetAllAction } from '../../actions/userAction'
 
-const UserList = (props) => {
-  const { users } = props.user
+class UserList extends Component {
+  componentDidMount = () => {
+    this.props.userGetAllAction()
+  }
 
-  return (
-    <ScrollView style={styles.scroll}>
-      <View style={styles.container}>
-        {
-          users.map((user, index) => (
-            <TouchableOpacity
-              key={index}
-              style={styles.touchableContainer}
-              onPress={() => props.userSelectAction(user)}
-            >
-              <UserItem user={user} />
-            </TouchableOpacity>
-          ))
-        }
-      </View>
-    </ScrollView>
-  )
+  render() {
+    const { users } = this.props.user
+
+    return (
+      <ScrollView style={styles.scroll}>
+        <View style={styles.container}>
+          {
+            users.map((user, index) => (
+              <TouchableOpacity
+                key={index}
+                style={styles.touchableContainer}
+                onPress={() => this.props.userSelectAction(user)}
+              >
+                <UserItem user={user} />
+              </TouchableOpacity>
+            ))
+          }
+        </View>
+      </ScrollView>
+    )
+  }
 }
 
 const styles = StyleSheet.create({
@@ -50,5 +56,5 @@ export default connect(
   (state) => ({
     user: state.user
   }),
-  { userSelectAction }
+  { userSelectAction, userGetAllAction }
 )(UserList)
