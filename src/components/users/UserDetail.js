@@ -1,5 +1,5 @@
 import React from 'react'
-import { Text, View, Modal, Button, StyleSheet } from 'react-native'
+import { Text, View, Modal, Button, Image, StyleSheet } from 'react-native'
 
 const UserDetail = (props) => {
   if (props.selectedUser === null) return null
@@ -10,6 +10,10 @@ const UserDetail = (props) => {
       animationType="slide"
     >
       <View style={styles.container}>
+        <Image
+          style={styles.image}
+          source={require('../../assets/images/user.png')}
+        />
         <Text style={styles.userName}>{props.selectedUser.name}</Text>
         <Button
           title="Cancel"
@@ -36,7 +40,12 @@ const styles = StyleSheet.create({
   userName: {
     fontSize: 20,
     fontWeight: 'bold',
-  }
+  },
+  image: {
+    width: 200,
+    height: 200,
+    marginBottom: 15
+  },
 })
 
 export default UserDetail
