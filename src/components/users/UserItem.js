@@ -1,5 +1,6 @@
 import React from 'react'
 import { Text, View, StyleSheet } from 'react-native'
+import STYLES from '../../constants/styles'
 
 const UserItem = (props) => {
   const { user } = props
@@ -15,7 +16,7 @@ const styles = StyleSheet.create({
   container: {
     display: 'flex',
     flexDirection: 'row',
-    backgroundColor: '#666',
+    backgroundColor: STYLES.COLOR.PRIMARY,
     padding: 10,
     marginBottom: 10,
     width: '100%'

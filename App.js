@@ -23,6 +23,18 @@ export default class App extends Component {
     this.setState({ userNameInput: event })
   }
 
+  handleOnAddUser = () => {
+    const newUsers = [
+      { name: this.state.userNameInput },
+      ...this.state.users
+    ]
+
+    this.setState({
+      users: newUsers,
+      userNameInput: ''
+    })
+  }
+
   render() {
     return (
       <View style={styles.container}>
@@ -30,6 +42,7 @@ export default class App extends Component {
         <UserInput
           nameInput={this.state.userNameInput}
           onChangeTextInput={this.handleOnChangeUserNameInput}
+          onAddUser={this.handleOnAddUser}
         />
         <UserList users={this.state.users} />
       </View>

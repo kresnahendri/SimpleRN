@@ -6,16 +6,17 @@ const UserInput = (props) => {
   return (
     <View style={styles.container}>
       <TextInput
+        style={styles.textInput}
         placeholder="Type your name"
         value={props.nameInput}
-        onChangeText={props.onChangeTextInput}
+        onChangeText={(event) => props.onChangeTextInput(event)}
       />
       <Button
         color={STYLES.COLOR.PRIMARY}
         title="Add"
         onPress={
           // Will replace with redux action: USER_ADD
-          (event) => alert(props.nameInput)
+          () => props.onAddUser()
         }
       />
     </View>
@@ -27,7 +28,11 @@ const styles = StyleSheet.create({
     display: 'flex',
     flexDirection: 'row',
     width: '100%',
-    justifyContent: 'space-between'
+    justifyContent: 'space-between',
+    marginBottom: 30,
+  },
+  textInput: {
+    flex: 1
   }
 })
 
