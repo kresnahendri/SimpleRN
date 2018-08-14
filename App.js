@@ -43,12 +43,24 @@ export default class App extends Component {
     })
   }
 
+  handleOnDeleteUser = (selectedUser) => {
+    newUsers = this.state.users.filter((user) => {
+      return user.name !== selectedUser.name
+    })
+
+    this.setState({
+      users: newUsers,
+      selectedUser: null
+    })
+  }
+
   render() {
     return (
       <View style={styles.container}>
         <UserDetail
           selectedUser={this.state.selectedUser}
           onCancel={() => this.handleOnSelectUser(null)}
+          onDelete={this.handleOnDeleteUser}
         />
         <Text>Input User Detail</Text>
         <UserInput
