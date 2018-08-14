@@ -1,6 +1,8 @@
 import React from 'react'
+import { connect } from 'react-redux'
 import { View, TextInput, Button, StyleSheet } from 'react-native'
 import STYLES from '../../constants/styles'
+import { userAddAction, userChangeInputAction } from '../../actions/userAction'
 
 const UserInput = (props) => {
   return (
@@ -9,14 +11,15 @@ const UserInput = (props) => {
         style={styles.textInput}
         placeholder="Type your name"
         value={props.nameInput}
-        onChangeText={(event) => props.onChangeTextInput(event)}
+        // USER_CHANGE_INPUT
+        onChangeText={(event) => props.userChangeInputAction(event)}
       />
       <Button
         color={STYLES.COLOR.PRIMARY}
         title="Add"
         onPress={
-          // Will replace with redux action: USER_ADD
-          () => props.onAddUser()
+          // USER_ADD
+          () => props.userAddAction(props.user.userNameInput)
         }
       />
     </View>
@@ -36,4 +39,9 @@ const styles = StyleSheet.create({
   }
 })
 
-export default UserInput
+export default connect(
+  (state) => ({
+    user: state.user
+  }),
+  { userAddAction, userChangeInputAction }
+)(UserInput)

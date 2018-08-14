@@ -65,7 +65,6 @@ export default class App extends Component {
         <Text>Input User Detail</Text>
         <UserInput
           nameInput={this.state.userNameInput}
-          onChangeTextInput={this.handleOnChangeUserNameInput}
           onAddUser={this.handleOnAddUser}
         />
         <UserList
