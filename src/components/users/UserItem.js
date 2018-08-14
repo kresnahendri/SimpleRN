@@ -3,7 +3,7 @@ import { Text, View, StyleSheet } from 'react-native'
 
 const UserItem = (props) => {
   const { user } = props
-  
+
   return (
     <View style={styles.container}>
       <Text style={styles.text}>{user.name}</Text>

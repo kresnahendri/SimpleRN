@@ -1,7 +1,8 @@
-import React, {Component} from 'react'
-import { StyleSheet, Text, View} from 'react-native'
+import React, { Component } from 'react'
+import { StyleSheet, Text, View } from 'react-native'
 import UserInput from './src/components/users/UserInput'
 import UserList from './src/components/users/UserList'
+
 export default class App extends Component {
   state = {
     users: [
@@ -14,15 +15,23 @@ export default class App extends Component {
       { name: 'Chandra' },
       { name: 'Mahesa' },
       { name: 'Idrus' }
-    ]
+    ],
+    userNameInput: ''
+  }
+
+  handleOnChangeUserNameInput = (event) => {
+    this.setState({ userNameInput: event })
   }
 
   render() {
     return (
       <View style={styles.container}>
         <Text>Input User Detail</Text>
-        <UserInput />
-        <UserList users={this.state.users}/>
+        <UserInput
+          nameInput={this.state.userNameInput}
+          onChangeTextInput={this.handleOnChangeUserNameInput}
+        />
+        <UserList users={this.state.users} />
       </View>
     )
   }
