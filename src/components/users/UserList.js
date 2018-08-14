@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { View, Text, StyleSheet, ScrollView, TouchableOpacity } from 'react-native'
+import { View, Text, StyleSheet, ScrollView, TouchableOpacity, ActivityIndicator } from 'react-native'
 import UserItem from './UserItem'
 import { userSelectAction, userGetAllAction } from '../../actions/userAction'
 
@@ -12,6 +12,10 @@ class UserList extends Component {
   render() {
     const { users } = this.props.user
 
+    if (users.length === 0) {
+      return <ActivityIndicator />
+    }
+    
     return (
       <ScrollView style={styles.scroll}>
         <View style={styles.container}>
