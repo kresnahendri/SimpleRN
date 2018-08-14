@@ -7,11 +7,24 @@ export const userChangeInputAction = (userNameInput) => {
   }
 }
 export const userAddAction = (userName) => {
-  return {
-    type: USER_ADD,
-    payload: {
-      name: userName
-    }
+  return (dispatch) => {
+    fetch('https://simplern-1a70c.firebaseio.com/users.json', {
+      method: 'post',
+      body: JSON.stringify({
+        name: userName
+      })
+    })
+      .then((res) => res.json())
+      .then((resParsed) => {
+        console.log(resParsed)
+        dispatch({
+          type: USER_ADD,
+          payload: {
+            name: userName
+          }
+        })
+      })
+      .catch((error) => alert('Gagal Bro!'))
   }
 }
 
